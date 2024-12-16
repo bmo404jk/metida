@@ -2,11 +2,12 @@ package utils;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.WebDriverRunner;
+import enums.Lovecraft;
 import listeners.Log;
 import org.openqa.selenium.Cookie;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
-import pages.BasePage;
+import pages.BasketPage;
 import pages.LoginPage;
 import pages.MainPage;
 
@@ -18,14 +19,14 @@ import static com.codeborne.selenide.Selenide.*;
 public class BaseTest extends Log {
 
     String chrome = "chrome";
-    int countPassedTest = 0;
+    int countPassedTest = 1;
     int countFailedTest = 0;
     int countSkipTest = 0;
 
-    protected Log log = new Log();
     protected MainPage mainPage = new MainPage();
     protected LoginPage loginPage = new LoginPage();
-    protected BasePage basePage = new BasePage();
+    protected BaseCode baseCode = new BaseCode();
+    protected BasketPage basketPage = new BasketPage();
 
     @BeforeSuite
     public void BeforeTest() {
@@ -35,11 +36,13 @@ public class BaseTest extends Log {
         Configuration.browserSize = "1920x1080";
 
         log.info("Запускаем браузер: [" + chrome + "]");
-        System.setProperty("webdriver.chrome.driver", "src//main//resources//webdriver//131.0.6778.69//chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "src//main//resources//webdriver//131.0.6778.69//chromedriver");
         open("https://www.metida.ru/");
 
         //входим в аккаунт
-        loginPage.login(loginPage.getLogin(), loginPage.getPassword());
+        if(baseCode.getFioAccountElement().exists() &&  baseCode.getFioAccount() == "Алекасндр Б.") {
+            log.info("Вход в аккаунт не требуется, вы уже авторизированы");
+        } else loginPage.login(loginPage.getLogin(), loginPage.getPassword());
     }
 
     @AfterMethod
@@ -68,7 +71,6 @@ public class BaseTest extends Log {
         log.info("Проваленные тесты: [" + countFailedTest + "]");
         log.info("Тестов пропущено: [" + countSkipTest + "]");
         log.info("===============================================");
-        log.clearLogs();
     }
     //не нашёл нужные куки...
     public void setCookies(String cookieName, String cookieValue) {

@@ -5,9 +5,14 @@ import utils.BaseTest;
 
 public class Test001 extends BaseTest {
 
+    /*
+     * Нужно залогиниться в систему по логину и паролю
+     */
+
     @Test(description = "Проверка входа в аккаунт.")
     @Description("Простая проверка входа в аккаунт с проверкой соответствия отображемого логина после входа.")
     public void loginTest() {
-        Assert.assertEquals(basePage.getFioAccount(),"Алекасндр Б.");
+
+        Assert.assertEquals(baseCode.getFioAccount(),"Алекасндр Б.");
     }
 }

@@ -1,9 +1,11 @@
 package pages;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
+import utils.BaseCode;
+
 import static com.codeborne.selenide.Selenide.$;
 
-public class LoginPage extends BasePage {
+public class LoginPage extends BaseCode {
 
     private SelenideElement loginButton = $(By.xpath("//a[contains(text(), 'Войти') and contains(@href, '/auth/')]")),
     elementEnterWithPassword = $(By.xpath("//a[@class = 'bxmaker-authuserphone-link' and contains(text(),'Войти с помощью пароля')]")),

@@ -5,6 +5,10 @@ import org.apache.logging.log4j.core.config.Configurator;
 import org.apache.logging.log4j.core.appender.RollingFileAppender;
 import org.apache.logging.log4j.core.LoggerContext;
 import org.apache.logging.log4j.Logger;
+import pages.BasketPage;
+import pages.LoginPage;
+import pages.MainPage;
+import utils.BaseCode;
 
 public class Log {
     protected static final Logger log = LogManager.getLogger();
